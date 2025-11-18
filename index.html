@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black and White Clock</title>
+
+    <style>
+        /* Carrega fonte do arquivo local */
+        @font-face {
+            font-family: "against";
+            src: url("against regular.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "against", sans-serif;
+            overflow: hidden;
+            color: #5c5c5c;
+            background: transparent;
+            -webkit-touch-callout: none; 
+            -webkit-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none;
+        }
+
+        .clock-container {
+            position: absolute;
+            display: flex;
+            top: 0%;
+        }
+
+        .clock {
+            font-size: 4em;
+            font-weight: 800;
+            text-align: center;
+            margin-left: 5px;
+        }
+
+        .ampm {
+            position: relative;
+            opacity: 0.7;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 1px;
+            top: 3.1rem;
+        }
+
+        /* Removido: .blink e animação */
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <div class="ampm" id="ampm"></div>
+        <div class="clock" id="time"></div>
+    </div>
+
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+
+            var timeString = hours + ':' + minutes;
+
+            document.getElementById('time').innerHTML = timeString;
+            document.getElementById('ampm').innerHTML = ampm;
+
+            setTimeout(updateClock, 1000);
+        }
+
+        updateClock();
+    </script>
+</body>
+</html>
